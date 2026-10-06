@@ -1,0 +1,52 @@
+# functions.hex -- generated from functions.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+00008137  # 0x00000000  LUI  x2,0x8            li      sp, 0x8000              # initialise the stack pointer
+00010113  # 0x00000004  ADDI x2,x2,0           li      sp, 0x8000              # initialise the stack pointer
+00000993  # 0x00000008  ADDI x19,x0,0          li      s3, 0
+00100513  # 0x0000000C  ADDI x10,x0,1          li      a0, 1
+00200593  # 0x00000010  ADDI x11,x0,2          li      a1, 2
+00300613  # 0x00000014  ADDI x12,x0,3          li      a2, 3
+03C000EF  # 0x00000018  JAL  x1,60             jal     ra, sum3
+00050413  # 0x0000001C  ADDI x8,x10,0          mv      s0, a0                  # 6
+00500513  # 0x00000020  ADDI x10,x0,5          li      a0, 5
+03C000EF  # 0x00000024  JAL  x1,60             jal     ra, factorial
+00050493  # 0x00000028  ADDI x9,x10,0          mv      s1, a0                  # 120
+00000297  # 0x0000002C  AUIPC x5,0x0           la      t0, sum3
+02828293  # 0x00000030  ADDI x5,x5,40          la      t0, sum3
+00100513  # 0x00000034  ADDI x10,x0,1          li      a0, 1
+00200593  # 0x00000038  ADDI x11,x0,2          li      a1, 2
+00300613  # 0x0000003C  ADDI x12,x0,3          li      a2, 3
+000280E7  # 0x00000040  JALR x1,0(x5)          jalr    ra, 0(t0)
+00050913  # 0x00000044  ADDI x18,x10,0         mv      s2, a0                  # 6
+00000513  # 0x00000048  ADDI x10,x0,0          li      a0, 0
+05D00893  # 0x0000004C  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x00000050  ECALL                  ecall
+00B50533  # 0x00000054  ADD  x10,x10,x11       add     a0, a0, a1
+00C50533  # 0x00000058  ADD  x10,x10,x12       add     a0, a0, a2
+00008067  # 0x0000005C  JALR x0,0(x1)          ret
+FF010113  # 0x00000060  ADDI x2,x2,-16         addi    sp, sp, -16
+00112623  # 0x00000064  SW   x1,12(x2)         sw      ra, 12(sp)
+00A12423  # 0x00000068  SW   x10,8(x2)         sw      a0, 8(sp)               # keep n for after the recursive call
+00A9C463  # 0x0000006C  BLT  x19,x10,8         blt     s3, a0, record_depth    # s3 = max(s3, n)
+0080006F  # 0x00000070  JAL  x0,8              j       depth_done
+00050993  # 0x00000074  ADDI x19,x10,0         mv      s3, a0
+00200293  # 0x00000078  ADDI x5,x0,2           li      t0, 2
+00554C63  # 0x0000007C  BLT  x10,x5,24         blt     a0, t0, factorial_base  # n < 2 -> return 1
+FFF50513  # 0x00000080  ADDI x10,x10,-1        addi    a0, a0, -1
+FDDFF0EF  # 0x00000084  JAL  x1,-36            jal     ra, factorial           # a0 = factorial(n - 1)
+00812303  # 0x00000088  LW   x6,8(x2)          lw      t1, 8(sp)               # t1 = n (reloaded: t-regs are caller-saved)
+018000EF  # 0x0000008C  JAL  x1,24             jal     ra, multiply_helper     # a0 = a0 * t1
+0080006F  # 0x00000090  JAL  x0,8              j       factorial_return
+00100513  # 0x00000094  ADDI x10,x0,1          li      a0, 1
+00C12083  # 0x00000098  LW   x1,12(x2)         lw      ra, 12(sp)
+01010113  # 0x0000009C  ADDI x2,x2,16          addi    sp, sp, 16
+00008067  # 0x000000A0  JALR x0,0(x1)          ret
+00050393  # 0x000000A4  ADDI x7,x10,0          mv      t2, a0
+00000513  # 0x000000A8  ADDI x10,x0,0          li      a0, 0
+00030E13  # 0x000000AC  ADDI x28,x6,0          mv      t3, t1
+000E0863  # 0x000000B0  BEQ  x28,x0,16         beqz    t3, multiply_ret
+00750533  # 0x000000B4  ADD  x10,x10,x7        add     a0, a0, t2
+FFFE0E13  # 0x000000B8  ADDI x28,x28,-1        addi    t3, t3, -1
+FF5FF06F  # 0x000000BC  JAL  x0,-12            j       multiply_step
+00008067  # 0x000000C0  JALR x0,0(x1)          ret

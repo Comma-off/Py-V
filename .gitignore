@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.bin
+build/
+dist/
+
+# Generated ELF example binaries (rebuild: python examples/elf/build.py)
+examples/elf/build/
+examples/elf/build-*/
+*.elf
+*.o

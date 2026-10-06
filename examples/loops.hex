@@ -1,0 +1,47 @@
+# loops.hex -- generated from loops.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+00008137  # 0x00000000  LUI  x2,0x8            li      sp, 0x8000              # stack top (nothing below it is used)
+00010113  # 0x00000004  ADDI x2,x2,0           li      sp, 0x8000              # stack top (nothing below it is used)
+00000413  # 0x00000008  ADDI x8,x0,0           li      s0, 0                   # accumulator
+00000913  # 0x0000000C  ADDI x18,x0,0          li      s2, 0                   # iteration counter
+00100293  # 0x00000010  ADDI x5,x0,1           li      t0, 1                   # i = 1
+00B00313  # 0x00000014  ADDI x6,x0,11          li      t1, 11                  # limit
+0062DA63  # 0x00000018  BGE  x5,x6,20          bge     t0, t1, sum_done        # while (i < 11)
+00540433  # 0x0000001C  ADD  x8,x8,x5          add     s0, s0, t0
+00128293  # 0x00000020  ADDI x5,x5,1           addi    t0, t0, 1
+00190913  # 0x00000024  ADDI x18,x18,1         addi    s2, s2, 1
+FF1FF06F  # 0x00000028  JAL  x0,-16            j       sum_loop
+00000493  # 0x0000002C  ADDI x9,x0,0           li      s1, 0
+00600293  # 0x00000030  ADDI x5,x0,6           li      t0, 6                   # outer counter
+00000A93  # 0x00000034  ADDI x21,x0,0          li      s5, 0                   # outer iteration counter
+02028263  # 0x00000038  BEQ  x5,x0,36          beqz    t0, mul_done
+00700393  # 0x0000003C  ADDI x7,x0,7           li      t2, 7                   # inner counter
+00038863  # 0x00000040  BEQ  x7,x0,16          beqz    t2, mul_next
+00148493  # 0x00000044  ADDI x9,x9,1           addi    s1, s1, 1
+FFF38393  # 0x00000048  ADDI x7,x7,-1          addi    t2, t2, -1
+FF5FF06F  # 0x0000004C  JAL  x0,-12            j       mul_inner
+FFF28293  # 0x00000050  ADDI x5,x5,-1          addi    t0, t0, -1
+001A8A93  # 0x00000054  ADDI x21,x21,1         addi    s5, s5, 1
+FE1FF06F  # 0x00000058  JAL  x0,-32            j       mul_outer
+00000993  # 0x0000005C  ADDI x19,x0,0          li      s3, 0
+00100A13  # 0x00000060  ADDI x20,x0,1          li      s4, 1                   # i = 1
+00B00E13  # 0x00000064  ADDI x28,x0,11         li      t3, 11
+01CA5E63  # 0x00000068  BGE  x20,x28,28        bge     s4, t3, sq_done
+000A0513  # 0x0000006C  ADDI x10,x20,0         mv      a0, s4
+000A0593  # 0x00000070  ADDI x11,x20,0         mv      a1, s4
+01C000EF  # 0x00000074  JAL  x1,28             jal     ra, multiply            # a0 = a0 * a1
+00A989B3  # 0x00000078  ADD  x19,x19,x10       add     s3, s3, a0
+001A0A13  # 0x0000007C  ADDI x20,x20,1         addi    s4, s4, 1
+FE5FF06F  # 0x00000080  JAL  x0,-28            j       sq_loop
+00000513  # 0x00000084  ADDI x10,x0,0          li      a0, 0
+05D00893  # 0x00000088  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x0000008C  ECALL                  ecall
+00050293  # 0x00000090  ADDI x5,x10,0          mv      t0, a0
+00000513  # 0x00000094  ADDI x10,x0,0          li      a0, 0
+00058313  # 0x00000098  ADDI x6,x11,0          mv      t1, a1
+00030863  # 0x0000009C  BEQ  x6,x0,16          beqz    t1, mul_ret
+00550533  # 0x000000A0  ADD  x10,x10,x5        add     a0, a0, t0
+FFF30313  # 0x000000A4  ADDI x6,x6,-1          addi    t1, t1, -1
+FF5FF06F  # 0x000000A8  JAL  x0,-12            j       mul_step
+00008067  # 0x000000AC  JALR x0,0(x1)          ret

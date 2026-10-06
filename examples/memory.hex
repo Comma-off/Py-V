@@ -1,0 +1,30 @@
+# memory.hex -- generated from memory.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+# note: this program also has a data section at 0x00000068 which is NOT included below; run the .asm to get it
+
+00000D97  # 0x00000000  AUIPC x27,0x0          la      s11, buffer             # s11 = base address of the buffer
+068D8D93  # 0x00000004  ADDI x27,x27,104       la      s11, buffer             # s11 = base address of the buffer
+123452B7  # 0x00000008  LUI  x5,0x12345        li      t0, 0x12345678
+67828293  # 0x0000000C  ADDI x5,x5,1656        li      t0, 0x12345678
+005DA023  # 0x00000010  SW   x5,0(x27)         sw      t0, 0(s11)
+000DA403  # 0x00000014  LW   x8,0(x27)         lw      s0, 0(s11)              # 0x12345678
+000D8483  # 0x00000018  LB   x9,0(x27)         lb      s1, 0(s11)              # 0x78 -- little-endian low byte
+0FF00313  # 0x0000001C  ADDI x6,x0,255         li      t1, 0xFF
+006D8223  # 0x00000020  SB   x6,4(x27)         sb      t1, 4(s11)
+004D8903  # 0x00000024  LB   x18,4(x27)        lb      s2, 4(s11)              # 0xFFFFFFFF
+004DC983  # 0x00000028  LBU  x19,4(x27)        lbu     s3, 4(s11)              # 0x000000FF
+000083B7  # 0x0000002C  LUI  x7,0x8            li      t2, 0x8000
+00038393  # 0x00000030  ADDI x7,x7,0           li      t2, 0x8000
+007D9323  # 0x00000034  SH   x7,6(x27)         sh      t2, 6(s11)
+006D9A03  # 0x00000038  LH   x20,6(x27)        lh      s4, 6(s11)              # 0xFFFF8000
+006DDA83  # 0x0000003C  LHU  x21,6(x27)        lhu     s5, 6(s11)              # 0x00008000
+11223E37  # 0x00000040  LUI  x28,0x11223       li      t3, 0x11223344
+344E0E13  # 0x00000044  ADDI x28,x28,836       li      t3, 0x11223344
+01CDA423  # 0x00000048  SW   x28,8(x27)        sw      t3, 8(s11)
+00BDCB03  # 0x0000004C  LBU  x22,11(x27)       lbu     s6, 11(s11)             # most significant byte -> 0x11
+008DCB83  # 0x00000050  LBU  x23,8(x27)        lbu     s7, 8(s11)              # least significant byte -> 0x44
+010D8E93  # 0x00000054  ADDI x29,x27,16        addi    t4, s11, 16
+FF0EAC03  # 0x00000058  LW   x24,-16(x29)      lw      s8, -16(t4)             # same as 0(s11) -> 0x12345678
+00000513  # 0x0000005C  ADDI x10,x0,0          li      a0, 0
+05D00893  # 0x00000060  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x00000064  ECALL                  ecall

@@ -1,0 +1,14 @@
+# hello.hex -- generated from hello.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+# note: this program also has a data section at 0x00000028 which is NOT included below; run the .asm to get it
+
+00000597  # 0x00000000  AUIPC x11,0x0          la      a1, message         # a1 = buffer address (auipc + addi)
+02858593  # 0x00000004  ADDI x11,x11,40        la      a1, message         # a1 = buffer address (auipc + addi)
+00000637  # 0x00000008  LUI  x12,0x0           li      a2, message_len     # a2 = length
+00F60613  # 0x0000000C  ADDI x12,x12,15        li      a2, message_len     # a2 = length
+00100513  # 0x00000010  ADDI x10,x0,1          li      a0, 1               # a0 = fd (1 = stdout)
+04000893  # 0x00000014  ADDI x17,x0,64         li      a7, 64              # a7 = syscall "write"
+00000073  # 0x00000018  ECALL                  ecall
+00000513  # 0x0000001C  ADDI x10,x0,0          li      a0, 0               # exit status 0
+05D00893  # 0x00000020  ADDI x17,x0,93         li      a7, 93              # a7 = syscall "exit"
+00000073  # 0x00000024  ECALL                  ecall

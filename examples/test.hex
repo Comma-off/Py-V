@@ -1,0 +1,33 @@
+# test.hex -- generated from test.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+02800093  # 0x00000000  ADDI x1,x0,40          addi x1, x0, 40
+00200113  # 0x00000004  ADDI x2,x0,2           addi x2, x0, 2
+002081B3  # 0x00000008  ADD  x3,x1,x2          add  x3, x1, x2        # 42
+40218233  # 0x0000000C  SUB  x4,x3,x2          sub  x4, x3, x2        # 40
+00200293  # 0x00000010  ADDI x5,x0,2           addi x5, x0, 2
+00119313  # 0x00000014  SLLI x6,x3,1           slli x6, x3, 1         # 84
+07F00393  # 0x00000018  ADDI x7,x0,127         addi x7, x0, 0x7F
+00F3F393  # 0x0000001C  ANDI x7,x7,15          andi x7, x7, 0x0F       # 15
+0103E393  # 0x00000020  ORI  x7,x7,16          ori  x7, x7, 0x10       # 31
+0013C393  # 0x00000024  XORI x7,x7,1           xori x7, x7, 0x1        # 30
+12345437  # 0x00000028  LUI  x8,0x12345        lui  x8, 0x12345        # 0x12345000
+04240493  # 0x0000002C  ADDI x9,x8,66          addi x9, x8, 0x42        # 0x12345042
+00A00513  # 0x00000030  ADDI x10,x0,10         addi x10, x0, 10
+01400593  # 0x00000034  ADDI x11,x0,20         addi x11, x0, 20
+00B52633  # 0x00000038  SLT  x12,x10,x11       slt x12, x10, x11        # 1
+00A5A6B3  # 0x0000003C  SLT  x13,x11,x10       slt x13, x11, x10        # 0
+01E00713  # 0x00000040  ADDI x14,x0,30         addi x14, x0, 30
+00E02023  # 0x00000044  SW   x14,0(x0)         sw   x14, 0(x0)
+00002783  # 0x00000048  LW   x15,0(x0)         lw   x15, 0(x0)          # 30
+00000813  # 0x0000004C  ADDI x16,x0,0          addi x16, x0, 0          # counter
+00A00893  # 0x00000050  ADDI x17,x0,10         addi x17, x0, 10         # limit
+00180813  # 0x00000054  ADDI x16,x16,1         addi x16, x16, 1
+FF184EE3  # 0x00000058  BLT  x16,x17,-4        blt  x16, x17, loop
+00500913  # 0x0000005C  ADDI x18,x0,5          addi x18, x0, 5
+00500993  # 0x00000060  ADDI x19,x0,5          addi x19, x0, 5
+01390463  # 0x00000064  BEQ  x18,x19,8         beq x18, x19, equal
+3E700A13  # 0x00000068  ADDI x20,x0,999        addi x20, x0, 999
+07B00A13  # 0x0000006C  ADDI x20,x0,123        addi x20, x0, 123
+FFF00A93  # 0x00000070  ADDI x21,x0,-1         addi x21, x0, -1
+00100073  # 0x00000074  EBREAK                 ebreak

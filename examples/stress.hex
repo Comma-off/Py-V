@@ -1,0 +1,106 @@
+# stress.hex -- generated from stress.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+10000137  # 0x00000000  LUI  x2,0x10000        lui     sp, 0x10000
+12345437  # 0x00000004  LUI  x8,0x12345        li      s0, 0x12345678
+67840413  # 0x00000008  ADDI x8,x8,1656        li      s0, 0x12345678
+FEC00513  # 0x0000000C  ADDI x10,x0,-20        li      a0, -20
+00A00593  # 0x00000010  ADDI x11,x0,10         li      a1, 10
+00B50633  # 0x00000014  ADD  x12,x10,x11       add     a2, a0, a1          # -10
+40A586B3  # 0x00000018  SUB  x13,x11,x10       sub     a3, a1, a0          # 30
+00A00513  # 0x0000001C  ADDI x10,x0,10         li      a0, 10
+02000593  # 0x00000020  ADDI x11,x0,32         li      a1, 32
+00000097  # 0x00000024  AUIPC x1,0x0           call    add_and_double      # returns 84
+070080E7  # 0x00000028  JALR x1,112(x1)        call    add_and_double      # returns 84
+00000513  # 0x0000002C  ADDI x10,x0,0          addi    a0, x0, 0            # base = 0
+00A00593  # 0x00000030  ADDI x11,x0,10         addi    a1, x0, 10           # count = 10
+00000097  # 0x00000034  AUIPC x1,0x0           call    fill_array
+084080E7  # 0x00000038  JALR x1,132(x1)        call    fill_array
+00000513  # 0x0000003C  ADDI x10,x0,0          addi    a0, x0, 0
+00A00593  # 0x00000040  ADDI x11,x0,10         addi    a1, x0, 10
+00000097  # 0x00000044  AUIPC x1,0x0           call    sum_array
+0B0080E7  # 0x00000048  JALR x1,176(x1)        call    sum_array
+00500513  # 0x0000004C  ADDI x10,x0,5          addi    a0, x0, 5
+00000097  # 0x00000050  AUIPC x1,0x0           call    factorial
+0E8080E7  # 0x00000054  JALR x1,232(x1)        call    factorial
+00000297  # 0x00000058  AUIPC x5,0x0           la      t0, indirect_target
+13428293  # 0x0000005C  ADDI x5,x5,308         la      t0, indirect_target
+000280E7  # 0x00000060  JALR x1,0(x5)          jalr    ra, 0(t0)
+123452B7  # 0x00000064  LUI  x5,0x12345        li      t0, 0x12345678
+67828293  # 0x00000068  ADDI x5,x5,1656        li      t0, 0x12345678
+00541E63  # 0x0000006C  BNE  x8,x5,28          bne     s0, t0, failure
+07B00293  # 0x00000070  ADDI x5,x0,123         li      t0, 123
+00128013  # 0x00000074  ADDI x0,x5,1           addi    x0, t0, 1
+00001863  # 0x00000078  BNE  x0,x0,16          bne     x0, x0, failure
+00000513  # 0x0000007C  ADDI x10,x0,0          li      a0, 0
+05D00893  # 0x00000080  ADDI x17,x0,93         li      a7, 93              # host exit
+00000073  # 0x00000084  ECALL                  ecall
+00100513  # 0x00000088  ADDI x10,x0,1          li      a0, 1
+05D00893  # 0x0000008C  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x00000090  ECALL                  ecall
+FF010113  # 0x00000094  ADDI x2,x2,-16         addi    sp, sp, -16
+00112623  # 0x00000098  SW   x1,12(x2)         sw      ra, 12(sp)
+00812423  # 0x0000009C  SW   x8,8(x2)          sw      s0, 8(sp)
+00B50533  # 0x000000A0  ADD  x10,x10,x11       add     a0, a0, a1
+00151513  # 0x000000A4  SLLI x10,x10,1         slli    a0, a0, 1
+00812403  # 0x000000A8  LW   x8,8(x2)          lw      s0, 8(sp)
+00C12083  # 0x000000AC  LW   x1,12(x2)         lw      ra, 12(sp)
+01010113  # 0x000000B0  ADDI x2,x2,16          addi    sp, sp, 16
+00008067  # 0x000000B4  JALR x0,0(x1)          jalr    x0, 0(ra)
+FF010113  # 0x000000B8  ADDI x2,x2,-16         addi    sp, sp, -16
+00112623  # 0x000000BC  SW   x1,12(x2)         sw      ra, 12(sp)
+00812423  # 0x000000C0  SW   x8,8(x2)          sw      s0, 8(sp)
+00050413  # 0x000000C4  ADDI x8,x10,0          addi    s0, a0, 0
+00000293  # 0x000000C8  ADDI x5,x0,0           addi    t0, x0, 0
+00B2DC63  # 0x000000CC  BGE  x5,x11,24         bge     t0, a1, fill_done
+00229313  # 0x000000D0  SLLI x6,x5,2           slli    t1, t0, 2
+006403B3  # 0x000000D4  ADD  x7,x8,x6          add     t2, s0, t1
+0053A023  # 0x000000D8  SW   x5,0(x7)          sw      t0, 0(t2)
+00128293  # 0x000000DC  ADDI x5,x5,1           addi    t0, t0, 1
+FEDFF06F  # 0x000000E0  JAL  x0,-20            jal     x0, fill_loop
+00812403  # 0x000000E4  LW   x8,8(x2)          lw      s0, 8(sp)
+00C12083  # 0x000000E8  LW   x1,12(x2)         lw      ra, 12(sp)
+01010113  # 0x000000EC  ADDI x2,x2,16          addi    sp, sp, 16
+00008067  # 0x000000F0  JALR x0,0(x1)          jalr    x0, 0(ra)
+FF010113  # 0x000000F4  ADDI x2,x2,-16         addi    sp, sp, -16
+00112623  # 0x000000F8  SW   x1,12(x2)         sw      ra, 12(sp)
+00812423  # 0x000000FC  SW   x8,8(x2)          sw      s0, 8(sp)
+00050413  # 0x00000100  ADDI x8,x10,0          addi    s0, a0, 0
+00000293  # 0x00000104  ADDI x5,x0,0           addi    t0, x0, 0
+00000513  # 0x00000108  ADDI x10,x0,0          addi    a0, x0, 0
+00B2DE63  # 0x0000010C  BGE  x5,x11,28         bge     t0, a1, sum_done
+00229313  # 0x00000110  SLLI x6,x5,2           slli    t1, t0, 2
+006403B3  # 0x00000114  ADD  x7,x8,x6          add     t2, s0, t1
+0003AE03  # 0x00000118  LW   x28,0(x7)         lw      t3, 0(t2)
+01C50533  # 0x0000011C  ADD  x10,x10,x28       add     a0, a0, t3
+00128293  # 0x00000120  ADDI x5,x5,1           addi    t0, t0, 1
+FE9FF06F  # 0x00000124  JAL  x0,-24            jal     x0, sum_loop
+00812403  # 0x00000128  LW   x8,8(x2)          lw      s0, 8(sp)
+00C12083  # 0x0000012C  LW   x1,12(x2)         lw      ra, 12(sp)
+01010113  # 0x00000130  ADDI x2,x2,16          addi    sp, sp, 16
+00008067  # 0x00000134  JALR x0,0(x1)          jalr    x0, 0(ra)
+FF010113  # 0x00000138  ADDI x2,x2,-16         addi    sp, sp, -16
+00112623  # 0x0000013C  SW   x1,12(x2)         sw      ra, 12(sp)
+00A12423  # 0x00000140  SW   x10,8(x2)         sw      a0, 8(sp)
+00100293  # 0x00000144  ADDI x5,x0,1           addi    t0, x0, 1
+02A2DA63  # 0x00000148  BGE  x5,x10,52         ble     a0, t0, factorial_base
+FFF50513  # 0x0000014C  ADDI x10,x10,-1        addi    a0, a0, -1
+00000097  # 0x00000150  AUIPC x1,0x0           call    factorial
+FE8080E7  # 0x00000154  JALR x1,-24(x1)        call    factorial
+00812283  # 0x00000158  LW   x5,8(x2)          lw      t0, 8(sp)
+00050313  # 0x0000015C  ADDI x6,x10,0          mv      t1, a0                  # t1 = factorial(n - 1)
+00000513  # 0x00000160  ADDI x10,x0,0          li      a0, 0                   # accumulator
+00028393  # 0x00000164  ADDI x7,x5,0           mv      t2, t0                  # counter = n
+00038863  # 0x00000168  BEQ  x7,x0,16          beqz    t2, factorial_mul_done
+00650533  # 0x0000016C  ADD  x10,x10,x6        add     a0, a0, t1
+FFF38393  # 0x00000170  ADDI x7,x7,-1          addi    t2, t2, -1
+FF5FF06F  # 0x00000174  JAL  x0,-12            j       factorial_mul_loop
+0080006F  # 0x00000178  JAL  x0,8              jal     x0, factorial_done
+00100513  # 0x0000017C  ADDI x10,x0,1          addi    a0, x0, 1
+00C12083  # 0x00000180  LW   x1,12(x2)         lw      ra, 12(sp)
+01010113  # 0x00000184  ADDI x2,x2,16          addi    sp, sp, 16
+00008067  # 0x00000188  JALR x0,0(x1)          jalr    x0, 0(ra)
+03700293  # 0x0000018C  ADDI x5,x0,55          li      t0, 55
+03700313  # 0x00000190  ADDI x6,x0,55          li      t1, 55
+EE629AE3  # 0x00000194  BNE  x5,x6,-268        bne     t0, t1, failure
+00008067  # 0x00000198  JALR x0,0(x1)          jalr    x0, 0(ra)

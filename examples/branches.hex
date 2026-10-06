@@ -1,0 +1,42 @@
+# branches.hex -- generated from branches.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+00000413  # 0x00000000  ADDI x8,x0,0           li      s0, 0                   # correct-check counter
+00500293  # 0x00000004  ADDI x5,x0,5           li      t0, 5
+00500313  # 0x00000008  ADDI x6,x0,5           li      t1, 5
+FFF00393  # 0x0000000C  ADDI x7,x0,-1          li      t2, -1                  # 0xFFFFFFFF: negative signed, huge unsigned
+00628463  # 0x00000010  BEQ  x5,x6,8           beq     t0, t1, beq_taken       # 5 == 5 -> taken
+07C0006F  # 0x00000014  JAL  x0,124            j       fail
+00140413  # 0x00000018  ADDI x8,x8,1           addi    s0, s0, 1
+06728A63  # 0x0000001C  BEQ  x5,x7,116         beq     t0, t2, fail            # 5 != -1 -> not taken
+00140413  # 0x00000020  ADDI x8,x8,1           addi    s0, s0, 1
+00729463  # 0x00000024  BNE  x5,x7,8           bne     t0, t2, bne_taken
+0680006F  # 0x00000028  JAL  x0,104            j       fail
+00140413  # 0x0000002C  ADDI x8,x8,1           addi    s0, s0, 1
+06629063  # 0x00000030  BNE  x5,x6,96          bne     t0, t1, fail
+00140413  # 0x00000034  ADDI x8,x8,1           addi    s0, s0, 1
+0053C463  # 0x00000038  BLT  x7,x5,8           blt     t2, t0, blt_taken       # -1 < 5 signed -> taken
+0540006F  # 0x0000003C  JAL  x0,84             j       fail
+00140413  # 0x00000040  ADDI x8,x8,1           addi    s0, s0, 1
+0472C663  # 0x00000044  BLT  x5,x7,76          blt     t0, t2, fail            # 5 < -1 is false
+00140413  # 0x00000048  ADDI x8,x8,1           addi    s0, s0, 1
+0062D463  # 0x0000004C  BGE  x5,x6,8           bge     t0, t1, bge_taken       # 5 >= 5 -> taken
+0400006F  # 0x00000050  JAL  x0,64             j       fail
+00140413  # 0x00000054  ADDI x8,x8,1           addi    s0, s0, 1
+0253DC63  # 0x00000058  BGE  x7,x5,56          bge     t2, t0, fail            # -1 >= 5 is false
+00140413  # 0x0000005C  ADDI x8,x8,1           addi    s0, s0, 1
+0072E463  # 0x00000060  BLTU x5,x7,8           bltu    t0, t2, bltu_taken      # 5 < 0xFFFFFFFF unsigned -> taken
+02C0006F  # 0x00000064  JAL  x0,44             j       fail
+00140413  # 0x00000068  ADDI x8,x8,1           addi    s0, s0, 1
+0253E263  # 0x0000006C  BLTU x7,x5,36          bltu    t2, t0, fail            # 0xFFFFFFFF < 5 is false
+00140413  # 0x00000070  ADDI x8,x8,1           addi    s0, s0, 1
+0053F463  # 0x00000074  BGEU x7,x5,8           bgeu    t2, t0, bgeu_taken      # 0xFFFFFFFF >= 5 unsigned -> taken
+0180006F  # 0x00000078  JAL  x0,24             j       fail
+00140413  # 0x0000007C  ADDI x8,x8,1           addi    s0, s0, 1
+0072F863  # 0x00000080  BGEU x5,x7,16          bgeu    t0, t2, fail            # 5 >= 0xFFFFFFFF is false
+00140413  # 0x00000084  ADDI x8,x8,1           addi    s0, s0, 1
+00000513  # 0x00000088  ADDI x10,x0,0          li      a0, 0                   # all checks passed
+0080006F  # 0x0000008C  JAL  x0,8              j       done
+00100513  # 0x00000090  ADDI x10,x0,1          li      a0, 1
+05D00893  # 0x00000094  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x00000098  ECALL                  ecall

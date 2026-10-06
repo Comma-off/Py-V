@@ -1,0 +1,30 @@
+# arithmetic.hex -- generated from arithmetic.asm by build_examples.py
+# one 32-bit little-endian instruction word per line; text base 0x00000000
+
+00A00293  # 0x00000000  ADDI x5,x0,10          li      t0, 10
+01400313  # 0x00000004  ADDI x6,x0,20          li      t1, 20
+00628433  # 0x00000008  ADD  x8,x5,x6          add     s0, t0, t1              # 30
+406284B3  # 0x0000000C  SUB  x9,x5,x6          sub     s1, t0, t1              # -10
+800003B7  # 0x00000010  LUI  x7,0x80000        li      t2, 0x7FFFFFFF
+FFF38393  # 0x00000014  ADDI x7,x7,-1          li      t2, 0x7FFFFFFF
+00138913  # 0x00000018  ADDI x18,x7,1          addi    s2, t2, 1               # wraps to 0x80000000
+FFF00E13  # 0x0000001C  ADDI x28,x0,-1         li      t3, -1
+001E5993  # 0x00000020  SRLI x19,x28,1         srli    s3, t3, 1               # 0x7FFFFFFF
+401E5A13  # 0x00000024  SRAI x20,x28,1         srai    s4, t3, 1               # 0xFFFFFFFF
+005E2AB3  # 0x00000028  SLT  x21,x28,x5        slt     s5, t3, t0              # -1 <  10 signed   -> 1
+005E3B33  # 0x0000002C  SLTU x22,x28,x5        sltu    s6, t3, t0              # huge < 10 unsigned -> 0
+12345BB7  # 0x00000030  LUI  x23,0x12345       li      s7, 0x12345678
+678B8B93  # 0x00000034  ADDI x23,x23,1656      li      s7, 0x12345678
+DEADCC37  # 0x00000038  LUI  x24,0xDEADC       li      s8, 0xDEADBEEF          # low 12 bits sign-extend negative
+EEFC0C13  # 0x0000003C  ADDI x24,x24,-273      li      s8, 0xDEADBEEF          # low 12 bits sign-extend negative
+00010EB7  # 0x00000040  LUI  x29,0x10          li      t4, 0x0000FFFF
+FFFE8E93  # 0x00000044  ADDI x29,x29,-1        li      t4, 0x0000FFFF
+00010F37  # 0x00000048  LUI  x30,0x10          li      t5, 0x0000FF00
+F00F0F13  # 0x0000004C  ADDI x30,x30,-256      li      t5, 0x0000FF00
+01EEFCB3  # 0x00000050  AND  x25,x29,x30       and     s9, t4, t5              # 0x0000FF00
+00100F93  # 0x00000054  ADDI x31,x0,1          li      t6, 1
+006F9D33  # 0x00000058  SLL  x26,x31,x6        sll     s10, t6, t1             # 1 << (20 & 31) = 0x00100000
+FFF00D93  # 0x0000005C  ADDI x27,x0,-1         addi    s11, x0, -1             # 0xFFFFFFFF
+00000513  # 0x00000060  ADDI x10,x0,0          li      a0, 0
+05D00893  # 0x00000064  ADDI x17,x0,93         li      a7, 93
+00000073  # 0x00000068  ECALL                  ecall
